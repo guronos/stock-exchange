@@ -1,17 +1,7 @@
-// import { mut} from 'vuex'
+import { State } from './types';
 
-// showOrdersAsks(state: State){
-//     return state.itemsAsks
-// }, 
-// showOrdersBids(state: State){
-//     return state.itemsBids
-// },
-// showTikers(state: State){
-//   return state.tikersRest
-// },
-// showUserOrdersAsks(state: State){
-// return state.userAsks
-// }, 
-// showUserOrdersBids(state: State){
-// return state.userBids
-// },
+export const showOrdersAsks = (state: State) => state.itemsAsks;
+export const showOrdersBids = (state: State) => state.itemsBids;
+export const showTikers = (state: State) => state.tikersRest;
+export const showUserOrdersAsks = (state: State) => state.userAsks;
+export const showUserOrdersBids = (state: State) => state.userBids;
