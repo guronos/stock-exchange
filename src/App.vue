@@ -1,9 +1,12 @@
 <template>
-  <StockGlass />
+    <div class="v-container">
+    <TheHeader />
+<router-view></router-view>
+</div>
 </template>
 
 <script setup lang="ts">
-import StockGlass from './views/StockGlass.vue'
+import TheHeader from './components/TheHeader.vue'
 </script>
 
 <style scoped>

@@ -1,50 +1,38 @@
 <template>
-  <v-btn color="primary" @click="store.dispatch('getAPIData')">Запрос</v-btn>
-<template v-if="!asks.lenght">
-    <div>
-        {{ userOrdersAsks }}
-        <table>
-            <caption>Биржевой стакан {{ store.getters.showTikers }}</caption>
-            <th>Цена</th>
-            <th>Количество</th>
-            <tr class="bg-red" v-for="(ask, idx) in asks" :key="idx">
-                <td>
-                    {{ ask[0] }}
-                </td>
-                <td>
-                    {{ Number(ask[1]) }}
-                </td>
-            </tr>
-            <tr>
-                <td>Spred</td>
-                <td>{{ spred }}</td>
-            </tr>
-            <tr class="bg-green" v-for="(bid, idx) in bids" :key="idx">
-                <td>
-                    {{ bid[0] }}
-                </td>
-                <td>
-                    {{ Number(bid[1]) }}
-                </td>
-            </tr>
+    <div class="v-container">
+    <div v-if="!store.state.haveResponseData">
+        <div v-if="!store.state.connect">
+            <TheErrors />
+            <div class="my-4 text-h6">
+    Укажите тикеры валют которые вас интересуют в формате 'tikertiker', без пробелов и иных символов.<br />
+    Например 'BNB/BTC' следует указывать - 'BNBBTC'
+</div>
+    <v-text-field label="Tikers" v-model="tikers" ></v-text-field>
 
-        </table>
-    </div>
+  <v-btn color="teal-lighten-2" @click="store.dispatch('getAPIData', tikers)">Запрос</v-btn>
+</div>
+<div v-else>
+    <TheLoading />
+</div>
+</div>
+<template v-if="store.state.haveResponseData">
+   <DataGlass />
 </template>
+</div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import { useStore } from '../store/store.ts'
+import DataGlass from '../components/DataGlass.vue'
+import TheErrors from '../components/TheErrors.vue'
+import TheLoading from '../components/TheLoading.vue'
 
 const store = useStore()
-// const get = ()=>{
-//   store.dispatch('getAPIData')
-// }
-const asks = computed(()=>store.getters.showOrdersAsks.reverse())
-const bids = computed(()=>store.getters.showOrdersBids)
-const spred = computed(()=>((store.getters.showOrdersAsks[store.getters.showOrdersAsks.length-1]?.[0]-store.getters.showOrdersBids[0]?.[0]).toFixed(6)))
-const userOrdersAsks = computed(()=>store.getters.showUserOrdersAsks)
-const userOrdersBids =computed(()=>store.getters.showUserOrdersBids)
+const tikers = ref('BNBBTC')
+onUnmounted(()=>{
+    console.log('Размонтировано')
+    store.commit('closeStream')
+})
 </script>
 <style>
 
