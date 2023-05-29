@@ -1,4 +1,4 @@
-import { State } from './types';
+import { State, DataResponseRest } from './types';
 
 export const getAPIData = async ({ commit, state, dispatch }: { commit: any; state: State; dispatch: any }, tikersData: string[]): Promise<void> => {
   try {
@@ -19,7 +19,7 @@ export const getAPIData = async ({ commit, state, dispatch }: { commit: any; sta
       }
     };
 
-    state.socket.onmessage = async (e: MessageEvent) => {
+    state.socket.onmessage = async (e: MessageEvent): Promise<void> => {
       let message: JSON = JSON.parse(e.data);
       if (!state.lastUpdateId) {
         state.itemsStream.push(message);
@@ -35,27 +35,22 @@ export const getAPIData = async ({ commit, state, dispatch }: { commit: any; sta
       commit('closeStream');
     };
 
-    async function runResponseRest() {
+    async function runResponseRest(): Promise<void> {
       requestRest = true;
       fetch(`${state.API_URL_Rest}${state.kindOfFlow}?symbol=${state.tikersRest}&limit=${state.limit}`)
-        .then((response) => {
-          if (response.status == 200) {
-            return response.json();
-          } else {
-          }
-        })
-        .catch(() => {
+        .then((response): Promise<DataResponseRest>=> response.json())
+        .catch((): void => {
           commit('closeStream');
           state.errorMessage = 2;
         })
-        .then((responseJSON) => {
+        .then((responseJSON): void => {
           commit('saveDataFromRest', responseJSON);
         })
-        .catch(() => {});
+        .catch((): void => {});
     }
 
     setTimeout(reload, 8000);
-    function reload() {
+    function reload(): void {
       if (state.runStream) {
         if (state.itemsStream.length < 1) {
           if (state.countAttempts > 2) {
