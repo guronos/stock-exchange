@@ -1,8 +1,10 @@
 import { State, DataResponseRest, DataResponseStream } from './types';
 
-export const saveTikersAndConnect = (state: State, tikers: string): void => {
+export const saveTikersAndConnect = (state: State, tikersData: string[]): void => {
+  const [tikers, quantityOrders] = tikersData
   state.tikersRest = tikers.toUpperCase();
   state.tikersWS = tikers.toLowerCase();
+  state.limit = quantityOrders
   state.connect = true;
 };
 
@@ -46,10 +48,10 @@ export const saveDataFromStream = (state: State, dataFromStream: DataResponseStr
     });
     if (sort === 'down') {
       const sortItem = resaultItems.sort((a, b) => Number(a[0]) - Number(b[0]));
-      state.itemsAsks = sortItem.splice(0, 20);
+      state.itemsAsks = sortItem.splice(0, Number(state.limit));
     } else {
       const sortItem = resaultItems.sort((a, b) => Number(b[0]) - Number(a[0]));
-      state.itemsBids = sortItem.splice(0, 20);
+      state.itemsBids = sortItem.splice(0, Number(state.limit));
     }
   }
   deleteDubles(dataFromStream.a, state.itemsAsks, 'down');

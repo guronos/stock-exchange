@@ -1,7 +1,7 @@
 export interface State {
   API_URL_Rest: string;
   kindOfFlow: string;
-  limitRest: string;
+  limit: string;
   lastUpdateId: number | string;
   tikersRest: string;
   API_WS: string;

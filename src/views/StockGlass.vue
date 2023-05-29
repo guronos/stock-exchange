@@ -8,8 +8,11 @@
           Например 'BNB/BTC' следует указывать - 'BNBBTC'
         </div>
         <v-text-field label="Tikers" v-model="tikers"></v-text-field>
-
-        <v-btn color="teal-lighten-2" @click="store.dispatch('getAPIData', tikers)">Запрос</v-btn>
+        <div class="my-4 text-h6">
+          Укажите количество отображаемых ордеров с каждой стороны (покупка, продажа)
+        </div>
+        <v-text-field label="Quantity" v-model="quantityOrders"></v-text-field>
+        <v-btn color="teal-lighten-2" @click="store.dispatch('getAPIData', [tikers, quantityOrders])">Запрос</v-btn>
       </div>
       <div v-else>
         <TheLoading />
@@ -29,6 +32,7 @@ import TheLoading from '../components/TheLoading.vue';
 
 const store = useStore();
 const tikers = ref('BNBBTC');
+const quantityOrders = ref('10')
 onUnmounted(() => {
   store.commit('closeStream');
 });

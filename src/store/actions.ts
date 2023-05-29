@@ -1,10 +1,10 @@
 import { State } from './types';
 
-export const getAPIData = async ({ commit, state, dispatch }: { commit: any; state: State; dispatch: any }, tiker: string): Promise<void> => {
+export const getAPIData = async ({ commit, state, dispatch }: { commit: any; state: State; dispatch: any }, tikersData: string[]): Promise<void> => {
   try {
     state.runStream = true;
     state.errorMessage = 0;
-    await commit('saveTikersAndConnect', tiker);
+    await commit('saveTikersAndConnect', tikersData);
     let requestRest = false;
     state.socket = new WebSocket(`${state.API_WS}${state.streamId}`);
     state.socket.onopen = () => {
@@ -37,7 +37,7 @@ export const getAPIData = async ({ commit, state, dispatch }: { commit: any; sta
 
     async function runResponseRest() {
       requestRest = true;
-      fetch(`${state.API_URL_Rest}${state.kindOfFlow}?symbol=${state.tikersRest}&limit=${state.limitRest}`)
+      fetch(`${state.API_URL_Rest}${state.kindOfFlow}?symbol=${state.tikersRest}&limit=${state.limit}`)
         .then((response) => {
           if (response.status == 200) {
             return response.json();

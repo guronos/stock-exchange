@@ -1,7 +1,7 @@
 export default {
   API_URL_Rest: 'https://api.binance.com/api/v3/',
   kindOfFlow: 'depth',
-  limitRest: '20',
+  limit: '',
   lastUpdateId: '',
   tikersRest: '',
   API_WS: 'wss://stream.binance.com:9443/ws/stream',
