@@ -58,7 +58,7 @@ export const getAPIData = async ({ commit, state, dispatch }: { commit: any; sta
           } else {
             state.socket!.close();
             state.countAttempts += 1;
-            dispatch('getAPIData', state.tikersRest);
+            dispatch('getAPIData', tikersData);
           }
         }
       }

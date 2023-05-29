@@ -71,6 +71,8 @@ export const closeStream = (state: State) => {
     state.countAttempts = 0;
     state.lastUpdateId = '';
     state.tikersRest = '';
+    state.tikersWS = '';
+    state.limit = ''
     state.haveResponseData = false;
     state.errorMessage = 0;
   } else {
@@ -79,5 +81,8 @@ export const closeStream = (state: State) => {
     state.countAttempts = 0;
     state.haveResponseData = false;
     state.errorMessage = 0;
+    state.tikersRest = '';
+    state.tikersWS = '';
+    state.limit = ''
   }
 };
