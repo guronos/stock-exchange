@@ -4,7 +4,7 @@
       <caption class="bg-blue-grey-darken-2">
         Биржевой стакан
         {{
-          store.getters.showTikers
+          tikersInfo
         }}
       </caption>
       <thead class="bg-blue-grey-darken-2">
@@ -35,4 +35,5 @@ const bids = computed(() => store.getters.showOrdersBids);
 const spred = computed(() => ((store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] - store.getters.showOrdersBids[0]?.[0])/ store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] * 100).toFixed(3)) ;
 const userOrdersAsks = computed(() => store.getters.showUserOrdersAsks);
 const userOrdersBids = computed(() => store.getters.showUserOrdersBids);
+const tikersInfo = computed(()=> store.getters.showTikers)
 </script>
