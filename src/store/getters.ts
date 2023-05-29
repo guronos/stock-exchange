@@ -1,7 +1,7 @@
 import { State } from './types';
 
-export const showOrdersAsks = (state: State) => state.itemsAsks;
-export const showOrdersBids = (state: State) => state.itemsBids;
-export const showTikers = (state: State) => state.tikersRest;
-export const showUserOrdersAsks = (state: State) => state.userAsks;
-export const showUserOrdersBids = (state: State) => state.userBids;
+export const showOrdersAsks = (state: State): string[][] => state.itemsAsks;
+export const showOrdersBids = (state: State): string[][] => state.itemsBids;
+export const showTikers = (state: State): string => state.tikersRest;
+export const showUserOrdersAsks = (state: State): string[] => state.userAsks;
+export const showUserOrdersBids = (state: State): string[] => state.userBids;

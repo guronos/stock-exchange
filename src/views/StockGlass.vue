@@ -24,15 +24,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted, Ref } from 'vue';
 import { useStore } from '../store/store.ts';
 import DataGlass from '../components/DataGlass.vue';
 import TheErrors from '../components/TheErrors.vue';
 import TheLoading from '../components/TheLoading.vue';
 
 const store = useStore();
-const tikers = ref('BNBBTC');
-const quantityOrders = ref('10')
+const tikers: Ref<string> = ref('BNBBTC');
+const quantityOrders: Ref<string> = ref('10')
 onUnmounted(() => {
   store.commit('closeStream');
 });
