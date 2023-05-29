@@ -33,7 +33,5 @@ import TheLoading from '../components/TheLoading.vue';
 const store = useStore();
 const tikers: Ref<string> = ref('BNBBTC');
 const quantityOrders: Ref<string> = ref('10')
-onUnmounted(() => {
-  store.commit('closeStream');
-});
+onUnmounted(() => {store.commit('closeStream')});
 </script>

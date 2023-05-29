@@ -7,11 +7,9 @@
       Все еще не удается установить соединение с сервером, пробуем еще раз, в случае неудачи перезагрузим страницу, попробуйте отправить форму позже
     </div>
   </div>
-
   <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
 </template>
 <script setup lang="ts">
 import { useStore } from '../store/store.ts';
-
 const store = useStore();
 </script>

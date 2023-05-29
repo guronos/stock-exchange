@@ -14,6 +14,5 @@
 </template>
 <script setup lang="ts">
 import { useStore } from '../store/store.ts';
-
 const store = useStore();
 </script>
