@@ -16,7 +16,7 @@
         <AllOrders :colorClass="'text-deep-orange-darken-3'" :orders="asks" :userOrders="userOrdersAsks" />
         <tr class="bg-blue-grey-lighten-1" v-if="spred">
           <td>Spred</td>
-          <td>{{ Number(spred) }}</td>
+          <td>{{ Number(spred) }}%</td>
           <td></td>
         </tr>
         <AllOrders :colorClass="'text-green-accent-4'" :orders="bids" :userOrders="userOrdersBids" />
@@ -32,7 +32,7 @@ import AllOrders from './AllOrders.vue';
 const store = useStore();
 const asks = computed(() => store.getters.showOrdersAsks.reverse());
 const bids = computed(() => store.getters.showOrdersBids);
-const spred = computed(() => (store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] - store.getters.showOrdersBids[0]?.[0]).toFixed(6));
+const spred = computed(() => ((store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] - store.getters.showOrdersBids[0]?.[0])/ store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] * 100).toFixed(3)) ;
 const userOrdersAsks = computed(() => store.getters.showUserOrdersAsks);
 const userOrdersBids = computed(() => store.getters.showUserOrdersBids);
 </script>

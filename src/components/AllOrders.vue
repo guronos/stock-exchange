@@ -7,7 +7,7 @@
       {{ Number(ask[1]) }}
     </td>
     <td class="text-grey-darken-3">
-      {{ Number(ask[0]) * Number(ask[1]) }}
+      {{ (Number(ask[0]) * Number(ask[1])).toFixed(4) }}
     </td>
   </tr>
 </template>
