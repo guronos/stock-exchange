@@ -1,20 +1,22 @@
 <template>
-  <tr v-for="(ask, idx) in orders" :key="idx" :class="[{ 'bg-grey-lighten-2': userOrders.includes(ask[0]) }, colorClass]">
+  <tr v-for="(order, idx) in orders" :key="idx" :class="[{ 'bg-grey-lighten-2': userOrders.includes(order.price) }, colorClass]">
     <td class="font-weight-bold">
-      {{ ask[0] }}
+      {{ order.price }}
     </td>
     <td class="text-grey-darken-3">
-      {{ Number(ask[1]) }}
+      {{ Number(order.quantity) }}
     </td>
     <td class="text-grey-darken-3">
-      {{ (Number(ask[0]) * Number(ask[1])).toFixed(4) }}
+      {{ (Number(order.price) * Number(order.quantity)).toFixed(4) }}
     </td>
   </tr>
 </template>
 <script setup lang="ts">
+import { DataItem } from '../store/types';
+
 interface Props {
   colorClass: string;
-  orders: string[][];
+  orders: Array<DataItem>;
   userOrders: string[];
 }
 

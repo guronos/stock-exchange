@@ -31,5 +31,5 @@ import AllOrders from './AllOrders.vue';
 
 const store = useStore();
 const asks = computed(() => store.getters.showOrdersAsks.reverse());
-const spred = computed(() => ((store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] - store.getters.showOrdersBids[0]?.[0])/ store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.[0] * 100).toFixed(3));
+const spred = computed(() => ((store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.price - store.getters.showOrdersBids[0]?.price)/ store.getters.showOrdersAsks[store.getters.showOrdersAsks.length - 1]?.price * 100).toFixed(3));
 </script>

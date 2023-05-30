@@ -8,8 +8,8 @@ export interface State {
   streamId: number;
   tikersWS: string;
   itemsStream: JSON[];
-  itemsAsks: string[][] | [];
-  itemsBids: string[][] | [];
+  itemsAsks: Array<DataItem>;
+  itemsBids: Array<DataItem>;
   userAsks: string[];
   userBids: string[];
   connect: boolean;
@@ -18,6 +18,11 @@ export interface State {
   runStream: boolean;
   errorMessage: number;
   haveResponseData: boolean;
+}
+
+export interface DataItem {
+  price : string,
+  quantity : string,
 }
 
 export interface DataResponseRest {
